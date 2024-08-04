@@ -1,0 +1,296 @@
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    color: #ffffff; /* White text color */
+    margin: 0;
+    background-image: url('https://www.entrepreneurshipsecret.com/wp-content/uploads/2019/11/48423989-760F-4DFC-9927-1C56E9215B14.jpeg'); /* Set the background image */
+    background-size: cover; /* Cover the entire background */
+    background-attachment: fixed; /* Fix the background image */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes full viewport height */
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background: linear-gradient(180deg, #FF69B4, #4B0082); /* Gradient from pink to purple */
+    color: #ffffff; /* White text color */
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    z-index: 1000; /* Ensures sidebar is on top */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sidebar Nav Styles */
+.sidebar nav {
+    flex: 1; /* Make sidebar take full height */
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    padding: 10px 20px;
+}
+
+.sidebar nav ul li a {
+    color: #ffffff; /* White text color for links in sidebar */
+    text-decoration: none;
+    display: block; /* Makes the entire area clickable */
+    padding: 10px;
+    border-radius: 4px; /* Rounded corners for links */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.sidebar nav ul li a:hover {
+    background-color: #000000; /* Black background on hover */
+    color: #FF69B4; /* Pink text color on hover */
+}
+
+/* Content Styles */
+.content {
+    margin-left: 220px; /* Ensure content is pushed right to accommodate sidebar */
+    padding: 20px;
+    color: #ffffff; /* White text color for content */
+    background-color: transparent; /* No background color */
+    border-radius: 0; /* Remove border radius */
+    box-shadow: none; /* Remove box shadow */
+    flex: 1; /* Takes up available space */
+}
+
+/* Header Styles */
+header {
+    position: relative;
+    padding: 20px;
+    background-color: #000000; /* Full black background */
+    border: 3px solid; /* Border width */
+    border-image: linear-gradient(90deg, #FF69B4, #4B0082) 1; /* Gradient border */
+    color: #ffffff; /* White text color */
+    border-radius: 8px; /* Rounded corners for header */
+    margin-bottom: 20px; /* Space below header */
+}
+
+header h1 {
+    margin: 0;
+    color: #FF69B4; /* Pink color for header text */
+}
+
+/* Logo Container Styles */
+.logo-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.logo-container img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.logo-container span {
+    font-size: 1.5em;
+    background: linear-gradient(45deg, #4B0082, #FF69B4); /* Purple to pink gradient */
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* Button Styles */
+button {
+    background-color: #4B0082; /* Purple button color */
+    color: #ffffff; /* White text color */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+button:hover {
+    background-color: #000000; /* Black button color on hover */
+}
+
+/* Link Styles */
+a {
+    color: #FF69B4; /* Pink link color */
+}
+
+a:hover {
+    color: #4B0082; /* Purple link color on hover */
+}
+
+/* Carousel Styles */
+.carousel-inner {
+    text-align: center; /* Center images horizontally */
+}
+
+.carousel-item img {
+    width: auto; /* Maintain aspect ratio */
+    height: 400px; /* Set a fixed height */
+    max-width: 100%; /* Ensure images do not exceed container width */
+    object-fit: contain; /* Ensure the entire image is visible */
+    display: block; /* Remove default inline spacing */
+    margin: 0 auto; /* Center images horizontally */
+}
+
+/* Financial Services Page Styles */
+section h2 {
+    color: #ffffff; /* White color for section headings */
+    margin-bottom: 20px; /* Space below section heading */
+}
+
+ul {
+    padding: 0;
+    list-style-type: none; /* Remove default list styling */
+}
+
+ul li {
+    padding: 10px 0;
+}
+
+ul li a {
+    color: #FF69B4; /* Pink text color for service links */
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 4px; /* Rounded corners for links */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+ul li a:hover {
+    background-color: #4B0082; /* Purple background on hover */
+    color: #ffffff; /* White text color on hover */
+}
+
+/* Logout Page Styles */
+body.logout-page {
+    font-family: Arial, sans-serif;
+    color: #ffffff; /* White text color */
+    background-color: #000000; /* Black background color */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Prevents scrollbars */
+}
+
+.logout-container {
+    text-align: center; /* Center text horizontally */
+    background: #000000; /* Black background */
+    color: #ffffff; /* White text color */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.logout-container h1 {
+    margin-bottom: 20px;
+    color: #ffffff; /* White color for header */
+}
+
+.logout-container a {
+    color: #FF69B4; /* Pink link color */
+    text-decoration: none;
+}
+
+.logout-container a:hover {
+    color: #4B0082; /* Purple link color on hover */
+}
+
+/* Homepage Styles */
+.homepage .content {
+    margin-left: 220px; /* Ensure content is pushed right to accommodate sidebar */
+    padding: 20px;
+    color: #ffffff; /* White text color for content */
+    background-color: transparent; /* No background color */
+    border-radius: 0; /* Remove border radius */
+    box-shadow: none; /* Remove box shadow */
+}
+
+/* Section Styles for Homepage */
+.homepage section {
+    margin-bottom: 40px; /* Space between sections */
+    padding: 20px;
+    border-radius: 8px;
+    background-color: transparent; /* No background color */
+    box-shadow: none; /* Remove box shadow */
+}
+
+.homepage section h2 {
+    color: #ffffff; /* White color for section headings */
+    margin-bottom: 20px; /* Space below section heading */
+}
+
+/* Credit Card Styles */
+.credit-card {
+    width: 340px;
+    height: 210px;
+    border-radius: 15px;
+    padding: 20px;
+    background: linear-gradient(135deg, #1e5799 0%,#2989d8 50%,#207cca 50%,#7db9e8 100%);
+    color: white;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.6s;
+    position: relative;
+}
+
+.credit-card:hover {
+    transform: scale(1.05);
+}
+
+.credit-card .card-logo {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    height: 30px;
+}
+
+.credit-card .card-number,
+.credit-card .card-holder,
+.credit-card .expiry-date,
+.credit-card .balance {
+    margin: 10px 0;
+}
+
+.credit-card .card-number {
+    font-size: 1.4em;
+    letter-spacing: 2px;
+}
+
+.credit-card .card-holder,
+.credit-card .expiry-date {
+    font-size: 1em;
+}
+
+.credit-card .balance {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.credit-card .chip {
+    width: 50px;
+    height: 35px;
+    background: gold;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #000000; /* Black background for footer */
+    color: #ffffff; /* White text color for footer */
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid #4B0082; /* Purple border at the top */
+    width: 100%; /* Full width */
+    margin-top: auto; /* Pushes the footer to the bottom */
+}

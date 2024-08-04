@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeamlessPay - Transaction History</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        .transaction-history {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+        .transaction-history h2 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Navbar -->
+    <div class="sidebar">
+        <nav>
+            <ul>
+                <li><a href="index.html">Homepage</a></li>
+                <li><a href="financial-insights.html">Financial Insights</a></li>
+                <li><a href="financial-services.html">Financial Services</a></li>
+                <li><a href="credit-card.html">Credit Card Management</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="logout.html">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content">
+        <header>
+            <h1>Transaction History</h1>
+            <div class="logo-container">
+                <img src="logo1.png" alt="SeamlessPay Logo">
+                <span>SeamlessPay</span>
+            </div>    
+        </header>
+        <div class="transaction-history">
+            <h2>Your Transaction History</h2>
+            <!-- Transaction history details here -->
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Receiver Username</th>
+                        <th>Amount</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody id="transactionTableBody">
+                    <!-- Transactions will be added here by JavaScript -->
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-primary" onclick="window.location.href='index.html'">Back to Home</button>
+                <button class="btn btn-secondary" onclick="window.location.href='payment-transaction.html'">Make Another Transaction</button>
+                <button class="btn btn-danger" onclick="window.location.href='clear-history.html'">Clear History</button>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <div class="container">
+            <p class="mb-1">&copy; 2024 SeamlessPay. All rights reserved.</p>
+            <p class="mb-0">
+                <a href="privacy-policy.html" class="text-white">Privacy Policy</a> | 
+                <a href="terms-of-service.html" class="text-white">Terms of Service</a> |
+                <a href="contact.html" class="text-white">Contact Us</a>
+            </p>
+        </div>
+    </footer>
+    <script>
+        // Function to load transactions from local storage
+        function loadTransactions() {
+            const transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+            const transactionTableBody = document.getElementById('transactionTableBody');
+
+            transactions.forEach(transaction => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${transaction.date}</td>
+                    <td>${transaction.receiver}</td>
+                    <td>${transaction.amount}</td>
+                    <td>${transaction.message}</td>
+                `;
+                transactionTableBody.appendChild(row);
+            });
+        }
+
+        // Load transactions when the page is loaded
+        document.addEventListener('DOMContentLoaded', loadTransactions);
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

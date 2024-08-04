@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeamlessPay - Credit Card Management</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <nav>
+            <ul>
+                <li><a href="index.html">Homepage</a></li>
+                <li><a href="financial-insights.html">Financial Insights</a></li>
+                <li><a href="financial-services.html">Financial Services</a></li>
+                <li><a href="credit-card.html">Credit Card Management</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="logout.html">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content">
+        <header>
+            <h1>Credit Card Management</h1>
+            <div class="logo-container">
+                <img src="logo1.png" alt="SeamlessPay Logo">
+                <span>SeamlessPay</span>
+            </div>
+        </header>
+        <section id="creditCardFormSection">
+            <h2>Add Credit Card</h2>
+            <form id="addCreditCardForm">
+                <div class="mb-3">
+                    <label for="cardNumber" class="form-label">Card Number</label>
+                    <input type="text" class="form-control" id="cardNumber" required>
+                </div>
+                <div class="mb-3">
+                    <label for="cardHolderName" class="form-label">Card Holder Name</label>
+                    <input type="text" class="form-control" id="cardHolderName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="expiryDate" class="form-label">Expiry Date</label>
+                    <input type="month" class="form-control" id="expiryDate" required>
+                </div>
+                <div class="mb-3">
+                    <label for="cvv" class="form-label">CVV</label>
+                    <input type="text" class="form-control" id="cvv" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Card</button>
+            </form>
+        </section>
+        <section id="creditCardInfoSection" style="display:none;">
+            <h2>Your Credit Card</h2>
+            <div id="creditCardInfo" class="credit-card">
+                <img class="card-logo" src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Card Logo">
+                <div class="chip"></div>
+                <div class="card-number">•••• •••• •••• ••••</div>
+                <div class="card-holder">Holder: </div>
+                <div class="expiry-date">Expiry: </div>
+                <div class="balance">Balance: $0.00</div>
+            </div>
+            <button id="useAnotherCardBtn" class="btn btn-warning mt-3">Use Another Card</button>
+            <button id="topUpBtn" class="btn btn-success mt-3">Top Up</button>
+        </section>
+    </div>
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <div class="container">
+            <p class="mb-1">&copy; 2024 SeamlessPay. All rights reserved.</p>
+            <p class="mb-0">
+                <a href="privacy-policy.html" class="text-white">Privacy Policy</a> | 
+                <a href="terms-of-service.html" class="text-white">Terms of Service</a> |
+                <a href="contact.html" class="text-white">Contact Us</a>
+            </p>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const addCreditCardForm = document.getElementById('addCreditCardForm');
+            const creditCardFormSection = document.getElementById('creditCardFormSection');
+            const creditCardInfoSection = document.getElementById('creditCardInfoSection');
+            const creditCardInfo = document.getElementById('creditCardInfo');
+            const useAnotherCardBtn = document.getElementById('useAnotherCardBtn');
+            const topUpBtn = document.getElementById('topUpBtn');
+
+            const loadCreditCard = () => {
+                const creditCard = JSON.parse(localStorage.getItem('creditCard'));
+                if (creditCard) {
+                    creditCardFormSection.style.display = 'none';
+                    creditCardInfoSection.style.display = 'block';
+                    creditCardInfo.querySelector('.card-number').textContent = creditCard.cardNumber.replace(/.(?=.{4})/g, '•');
+                    creditCardInfo.querySelector('.card-holder').textContent = `Holder: ${creditCard.cardHolderName}`;
+                    creditCardInfo.querySelector('.expiry-date').textContent = `Expiry: ${creditCard.expiryDate}`;
+                    creditCardInfo.querySelector('.balance').textContent = `Balance: $${creditCard.balance.toFixed(2)}`;
+                } else {
+                    creditCardFormSection.style.display = 'block';
+                    creditCardInfoSection.style.display = 'none';
+                }
+            };
+
+            addCreditCardForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const cardNumber = document.getElementById('cardNumber').value;
+                const cardHolderName = document.getElementById('cardHolderName').value;
+                const expiryDate = document.getElementById('expiryDate').value;
+                const cvv = document.getElementById('cvv').value;
+
+                const creditCard = { cardNumber, cardHolderName, expiryDate, cvv, balance: 0.00 };
+                localStorage.setItem('creditCard', JSON.stringify(creditCard));
+                loadCreditCard();
+            });
+
+            useAnotherCardBtn.addEventListener('click', () => {
+                localStorage.removeItem('creditCard');
+                loadCreditCard();
+            });
+
+            topUpBtn.addEventListener('click', () => {
+                window.location.href = 'top-up.html'; // Redirect to top-up page
+            });
+
+            loadCreditCard();
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

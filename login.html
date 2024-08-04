@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SeamlessPay</title>
+    <link rel="stylesheet" href="css/login-register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="logo-container">
+        <img src="logo1.png" alt="SeamlessPay Logo">
+        <span>SeamlessPay</span>
+    </div>
+    <div class="login-container">
+        <header>
+            <h1>Login</h1>
+        </header>
+        <section>
+            <form id="loginForm">
+                <div class="mb-3">
+                    <label for="loginUsername" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="loginUsername" required>
+                </div>
+                <div class="mb-3">
+                    <label for="loginPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <p class="mt-2">Don't have an account? <a href="register.html">Register</a></p>
+            </form>
+        </section>
+    </div>
+    <script>
+        // Handle login
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Retrieve stored user credentials
+            const storedUser = localStorage.getItem('user');
+            if (storedUser) {
+                const { storedUsername, storedPassword } = JSON.parse(storedUser);
+                
+                // Basic authentication check
+                if (username === storedUsername && password === storedPassword) {
+                    localStorage.setItem('loggedInUser', username);
+                    window.location.href = 'index.html'; // Redirect to homepage on successful login
+                } else {
+                    alert('Invalid username or password.');
+                }
+            } else {
+                alert('No registered users found. Please register first.');
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

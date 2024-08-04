@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - SeamlessPay</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <script>
+        function submitForm(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Hide the form and show the confirmation message
+            document.getElementById('contactForm').style.display = 'none';
+            document.getElementById('confirmationMessage').style.display = 'block';
+        }
+
+        function backToContact() {
+            // Hide the confirmation message and show the form again
+            document.getElementById('confirmationMessage').style.display = 'none';
+            document.getElementById('contactForm').style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <div class="sidebar">
+        <nav>
+            <ul>
+                <li><a href="index.html">Homepage</a></li>
+                <li><a href="financial-insights.html">Financial Insights</a></li>
+                <li><a href="financial-services.html">Financial Services</a></li>
+                <li><a href="credit-card.html">Credit Card Management</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="logout.html">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <header>
+            <h1>Contact Us</h1>
+            <div class="logo-container">
+                <img src="logo1.png" alt="SeamlessPay Logo">
+                <span>SeamlessPay</span>
+            </div>
+        </header>
+
+        <main>
+            <p>If you have any questions or concerns, feel free to contact us through the form below or reach out via email or phone.</p>
+
+            <section>
+                <h2>Contact Form</h2>
+                <!-- Contact Form -->
+                <form id="contactForm" onsubmit="submitForm(event)" method="post">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Send Message</button>
+                </form>
+
+                <!-- Confirmation Message -->
+                <div id="confirmationMessage" style="display: none;">
+                    <h2>Thank You!</h2>
+                    <p>Your message has been successfully sent. We will get back to you as soon as possible.</p>
+                    <button onclick="backToContact()" class="btn btn-primary mt-3">Back to Contact Us</button>
+                </div>
+            </section>
+
+            <section>
+                <h2>Contact Information</h2>
+                <ul>
+                    <li>Email: <a href="mailto:info@seamlesspay.com">info@seamlesspay.com</a></li>
+                    <li>Phone: (123) 456-7890</li>
+                    <li>Address: 1234 Payment Ave, Finance City, FC 12345</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <div class="container">
+            <p class="mb-1">&copy; 2024 SeamlessPay. All rights reserved.</p>
+            <p class="mb-0">
+                <a href="privacy-policy.html" class="text-white">Privacy Policy</a> | 
+                <a href="terms-of-service.html" class="text-white">Terms of Service</a> |
+                <a href="contact.html" class="text-white">Contact Us</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

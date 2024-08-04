@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeamlessPay - Payment Successful</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Include Navbar -->
+    <div class="sidebar">
+        <nav>
+            <ul>
+                <li><a href="index.html">Homepage</a></li>
+                <li><a href="financial-insights.html">Financial Insights</a></li>
+                <li><a href="financial-services.html">Financial Services</a></li>
+                <li><a href="credit-card.html">Credit Card Management</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="logout.html">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content">
+        <header>
+            <h1>Payment Successful</h1>
+            <div class="logo-container">
+                <img src ="logo1.png"></a>
+                <span>SeamlessPay</span>
+            </div>    
+        </header>
+        <section>
+            <h2>Payment Details</h2>
+            <div id="paymentDetails"></div>
+
+            <h2>Transaction History</h2>
+            <div id="transactionHistory"></div>
+
+            <button class="btn btn-primary mt-3" onclick="window.location.href='online-transaction.html'">Make Another Transaction</button>
+            <button class="btn btn-secondary mt-3" onclick="window.location.href='index.html'">Back to Home</button>
+            <button class="btn btn-info mt-3" onclick="window.location.href='transaction-history.html'">See Transaction History</button>
+        </section>
+    </div>
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <div class="container">
+            <p class="mb-1">&copy; 2024 SeamlessPay. All rights reserved.</p>
+            <p class="mb-0">
+                <a href="privacy-policy.html" class="text-white">Privacy Policy</a> | 
+                <a href="terms-of-service.html" class="text-white">Terms of Service</a> |
+                <a href="contact.html" class="text-white">Contact Us</a>
+            </p>
+        </div>
+    </footer>
+    <script>
+        // Display payment details
+        const paymentDetails = JSON.parse(localStorage.getItem('transactions')).slice(-1)[0];
+        if (paymentDetails) {
+            document.getElementById('paymentDetails').innerHTML = `
+                <p><strong>Date:</strong> ${paymentDetails.date}</p>
+                <p><strong>Receiver:</strong> ${paymentDetails.receiver}</p>
+                <p><strong>Amount:</strong> $${paymentDetails.amount}</p>
+                <p><strong>Message:</strong> ${paymentDetails.message}</p>
+            `;
+        }
+        historyHtml += '</ul>';
+        document.getElementById('transactionHistory').innerHTML = historyHtml;
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

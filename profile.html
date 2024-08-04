@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeamlessPay - Profile</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <nav>
+            <ul>
+                <li><a href="index.html">Homepage</a></li>
+                <li><a href="financial-insights.html">Financial Insights</a></li>
+                <li><a href="financial-services.html">Financial Services</a></li>
+                <li><a href="credit-card.html">Credit Card Management</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="logout.html">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content">
+        <header>
+            <h1>Profile</h1>
+            <div class="logo-container">
+                <img src="logo1.png" alt="SeamlessPay Logo">
+                <span>SeamlessPay</span>
+            </div>
+        </header>
+        <section id="passwordSection">
+            <h2>Enter Password to View Profile</h2>
+            <form id="passwordForm">
+                <div class="mb-3">
+                    <label for="profilePassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="profilePassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </section>
+        <section id="profileSection" style="display:none;">
+            <h2>User Information</h2>
+            <p><strong>Username:</strong> <span id="profileUsername"></span></p>
+            <p><strong>Password:</strong> <span id="profileUserPassword"></span></p>
+            <h2>Credit Card Information</h2>
+            <div id="creditCardInfo" class="credit-card">
+                <div class="front">
+                    <img class="card-logo" src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Card Logo">
+                    <div class="chip"></div>
+                    <div class="card-number">•••• •••• •••• ••••</div>
+                    <div class="card-holder">Holder: </div>
+                    <div class="expiry-date">Expiry: </div>
+                </div>
+                <div class="back">
+                    <div class="cvv">CVV: </div>
+                </div>
+            </div>
+            <h2>Available Balance</h2>
+            <p><strong>Balance:</strong> <span id="availableBalance"></span></p>
+            <h2>Locked Amount</h2>
+            <div id="lockedAmountDisplay"></div>
+            <h2>Invested Amount</h2>
+            <div id="investedAmountDisplay"></div>
+        </section>
+    </div>
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <div class="container">
+            <p class="mb-1">&copy; 2024 SeamlessPay. All rights reserved.</p>
+            <p class="mb-0">
+                <a href="privacy-policy.html" class="text-white">Privacy Policy</a> | 
+                <a href="terms-of-service.html" class="text-white">Terms of Service</a> |
+                <a href="contact.html" class="text-white">Contact Us</a>
+            </p>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const passwordForm = document.getElementById('passwordForm');
+            const passwordSection = document.getElementById('passwordSection');
+            const profileSection = document.getElementById('profileSection');
+            const profileUsername = document.getElementById('profileUsername');
+            const profileUserPassword = document.getElementById('profileUserPassword');
+            const creditCardInfo = document.getElementById('creditCardInfo');
+            const availableBalance = document.getElementById('availableBalance');
+            const lockedAmountDisplay = document.getElementById('lockedAmountDisplay');
+            const investedAmountDisplay = document.getElementById('investedAmountDisplay');
+
+            const storedUser = JSON.parse(localStorage.getItem('user'));
+            const storedCreditCard = JSON.parse(localStorage.getItem('creditCard')) || { balance: 0 };
+            const lockedAmount = parseFloat(localStorage.getItem('lockedAmount')) || 0;
+            const investments = JSON.parse(localStorage.getItem('investments')) || [];
+
+            passwordForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const profilePassword = document.getElementById('profilePassword').value;
+
+                if (storedUser && storedUser.storedPassword === profilePassword) {
+                    passwordSection.style.display = 'none';
+                    profileSection.style.display = 'block';
+                    profileUsername.textContent = storedUser.storedUsername;
+                    profileUserPassword.textContent = storedUser.storedPassword;
+
+                    if (storedCreditCard) {
+                        creditCardInfo.querySelector('.card-number').textContent = storedCreditCard.cardNumber;
+                        creditCardInfo.querySelector('.card-holder').textContent = `Holder: ${storedCreditCard.cardHolderName}`;
+                        creditCardInfo.querySelector('.expiry-date').textContent = `Expiry: ${storedCreditCard.expiryDate}`;
+                        creditCardInfo.querySelector('.cvv').textContent = `CVV: ${storedCreditCard.cvv}`;
+                        availableBalance.textContent = `$${storedCreditCard.balance.toFixed(2)}`;
+                    }
+
+                    // Update locked and invested amount displays
+                    lockedAmountDisplay.innerHTML = `<p><strong>Locked Amount:</strong> $${lockedAmount.toFixed(2)}</p>`;
+
+                    const totalInvestment = investments.reduce((total, investment) => total + investment.amount, 0);
+                    investedAmountDisplay.innerHTML = `<p><strong>Invested Amount:</strong> $${totalInvestment.toFixed(2)}</p>`;
+                } else {
+                    alert('Incorrect password. Please try again.');
+                }
+            });
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

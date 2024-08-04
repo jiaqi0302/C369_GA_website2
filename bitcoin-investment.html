@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeamlessPay - Bitcoin Investment</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <nav>
+            <ul>
+                <li><a href="index.html">Homepage</a></li>
+                <li><a href="financial-insights.html">Financial Insights</a></li>
+                <li><a href="financial-services.html">Financial Services</a></li>
+                <li><a href="credit-card.html">Credit Card Management</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="logout.html">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content">
+        <header>
+            <h1>Bitcoin Investment</h1>
+            <div class="logo-container">
+                <img src="logo1.png" alt="SeamlessPay Logo">
+                <span>SeamlessPay</span>
+            </div>
+        </header>
+        <section>
+            <p>Diversify your portfolio and invest in Bitcoin here.</p>
+        </section>
+        <section>
+            <h2>Invest in Bitcoin</h2>
+            <form id="investmentForm">
+                <div class="mb-3">
+                    <label for="investmentAmount" class="form-label">Amount to Invest</label>
+                    <input type="number" class="form-control" id="investmentAmount" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Invest</button>
+            </form>
+        </section>
+        <section>
+            <h2>Your Bitcoin Investment</h2>
+            <div id="investmentAmountDisplay"></div>
+            <button class="btn btn-danger" onclick="window.location.href='retrieve-money.html'">Retrieve Investment</button>
+        </section>
+    </div>
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <div class="container">
+            <p class="mb-1">&copy; 2024 SeamlessPay. All rights reserved.</p>
+            <p class="mb-0">
+                <a href="privacy-policy.html" class="text-white">Privacy Policy</a> | 
+                <a href="terms-of-service.html" class="text-white">Terms of Service</a> |
+                <a href="contact.html" class="text-white">Contact Us</a>
+            </p>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('investmentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const investmentAmount = parseFloat(document.getElementById('investmentAmount').value);
+            const creditCard = JSON.parse(localStorage.getItem('creditCard')) || { balance: 0 };
+            const cardBalance = creditCard.balance;
+
+            if (investmentAmount > cardBalance) {
+                alert('Insufficient balance. Please top up your card.');
+                window.location.href = 'top-up.html';
+                return;
+            }
+
+            if (confirm('Are you sure you want to invest this amount?')) {
+                // Deduct from card balance
+                creditCard.balance = cardBalance - investmentAmount;
+                localStorage.setItem('creditCard', JSON.stringify(creditCard));
+
+                // Log the investment
+                let investments = JSON.parse(localStorage.getItem('investments')) || [];
+                investments.push({
+                    amount: investmentAmount,
+                    date: new Date().toLocaleString()
+                });
+                localStorage.setItem('investments', JSON.stringify(investments));
+
+                // Update investment display
+                updateInvestmentAmountDisplay();
+
+                alert('Investment successful!');
+            }
+        });
+
+        function updateInvestmentAmountDisplay() {
+            let investments = JSON.parse(localStorage.getItem('investments')) || [];
+            const totalInvestment = investments.reduce((total, investment) => total + investment.amount, 0);
+            document.getElementById('investmentAmountDisplay').innerHTML = `<p><strong>Total Investment:</strong> $${totalInvestment.toFixed(2)}</p>`;
+        }
+
+        // Initialize the investment display
+        updateInvestmentAmountDisplay();
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

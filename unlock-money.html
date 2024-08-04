@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlock Money - SeamlessPay</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <nav>
+            <ul>
+                <li><a href="index.html">Homepage</a></li>
+                <li><a href="financial-insights.html">Financial Insights</a></li>
+                <li><a href="financial-services.html">Financial Services</a></li>
+                <li><a href="credit-card.html">Credit Card Management</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="logout.html">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content">
+        <header>
+            <h1>Unlock Money</h1>
+            <div class="logo-container">
+                <img src="logo1.png" alt="SeamlessPay Logo">
+                <span>SeamlessPay</span>
+            </div>
+        </header>
+        <section>
+            <form id="unlockMoneyForm">
+                <div class="mb-3">
+                    <label for="unlockAmount" class="form-label">Amount to Unlock</label>
+                    <input type="number" class="form-control" id="unlockAmount" min="0" step="0.01" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Unlock</button>
+            </form>
+        </section>
+    </div>
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <div class="container">
+            <p class="mb-1">&copy; 2024 SeamlessPay. All rights reserved.</p>
+            <p class="mb-0">
+                <a href="privacy-policy.html" class="text-white">Privacy Policy</a> | 
+                <a href="terms-of-service.html" class="text-white">Terms of Service</a> |
+                <a href="contact.html" class="text-white">Contact Us</a>
+            </p>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const unlockMoneyForm = document.getElementById('unlockMoneyForm');
+
+            unlockMoneyForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const unlockAmount = parseFloat(document.getElementById('unlockAmount').value);
+                const password = document.getElementById('password').value;
+
+                // Retrieve stored user credentials
+                const storedUser = JSON.parse(localStorage.getItem('user'));
+
+                if (storedUser && password === storedUser.storedPassword) {
+                    // Retrieve current credit card data
+                    const creditCard = JSON.parse(localStorage.getItem('creditCard'));
+                    const lockedAmount = parseFloat(localStorage.getItem('lockedAmount')) || 0;
+
+                    if (creditCard && unlockAmount <= lockedAmount) {
+                        // Update the balance
+                        creditCard.balance += unlockAmount;
+
+                        // Update the locked amount
+                        localStorage.setItem('lockedAmount', (lockedAmount - unlockAmount).toFixed(2));
+
+                        // Save updated credit card data back to localStorage
+                        localStorage.setItem('creditCard', JSON.stringify(creditCard));
+                        
+                        // Redirect back to the credit card page or update the UI accordingly
+                        window.location.href = 'money-lock.html';
+                    } else {
+                        alert('Amount to unlock exceeds locked amount or no credit card information found.');
+                    }
+                } else {
+                    alert('Incorrect password.');
+                }
+            });
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

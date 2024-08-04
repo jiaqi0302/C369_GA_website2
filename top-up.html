@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeamlessPay - Top Up</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <nav>
+            <ul>
+                <li><a href="index.html">Homepage</a></li>
+                <li><a href="financial-insights.html">Financial Insights</a></li>
+                <li><a href="financial-services.html">Financial Services</a></li>
+                <li><a href="credit-card.html">Credit Card Management</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="logout.html">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content">
+        <header>
+            <h1>Top Up</h1>
+            <div class="logo-container">
+                <img src="logo1.png" alt="SeamlessPay Logo">
+                <span>SeamlessPay</span>
+            </div>
+        </header>
+        <section>
+            <h2>Top Up Your Account</h2>
+            <form id="topUpForm">
+                <div class="mb-3">
+                    <label for="topUpAmount" class="form-label">Amount to Top Up</label>
+                    <input type="number" class="form-control" id="topUpAmount" required>
+                </div>
+                <button type="submit" class="btn btn-success">Top Up</button>
+            </form>
+        </section>
+    </div>
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <div class="container">
+            <p class="mb-1">&copy; 2024 SeamlessPay. All rights reserved.</p>
+            <p class="mb-0">
+                <a href="privacy-policy.html" class="text-white">Privacy Policy</a> | 
+                <a href="terms-of-service.html" class="text-white">Terms of Service</a> |
+                <a href="contact.html" class="text-white">Contact Us</a>
+            </p>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('topUpForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const topUpAmount = parseFloat(document.getElementById('topUpAmount').value);
+            if (topUpAmount > 0) {
+                const creditCard = JSON.parse(localStorage.getItem('creditCard'));
+                if (creditCard) {
+                    creditCard.balance += topUpAmount;
+                    localStorage.setItem('creditCard', JSON.stringify(creditCard));
+                    alert(`Successfully topped up $${topUpAmount}.`);
+                    window.location.href = 'credit-card.html'; // Redirect back to credit card page after top up
+                } else {
+                    alert('No credit card found. Please add a credit card first.');
+                    window.location.href = 'credit-card.html'; // Redirect to credit card page
+                }
+            } else {
+                alert('Please enter a valid amount.');
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeamlessPay - Payment Transaction</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <nav>
+            <ul>
+                <li><a href="index.html">Homepage</a></li>
+                <li><a href="financial-insights.html">Financial Insights</a></li>
+                <li><a href="financial-services.html">Financial Services</a></li>
+                <li><a href="credit-card.html">Credit Card Management</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="logout.html">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content">
+        <header>
+            <h1>Payment Transaction</h1>
+            <div class="logo-container">
+                <img src="logo1.png" alt="SeamlessPay Logo">
+                <span>SeamlessPay</span>
+            </div>
+        </header>
+        <section>
+            <h2>Transfer Money</h2>
+            <form id="paymentForm">
+                <div class="mb-3">
+                    <label for="receiver" class="form-label">Receiver Username</label>
+                    <input type="text" class="form-control" id="receiver" required>
+                </div>
+                <div class="mb-3">
+                    <label for="paymentAmount" class="form-label">Amount to Transfer</label>
+                    <input type="number" class="form-control" id="paymentAmount" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message for Receiver (Optional)</label>
+                    <textarea class="form-control" id="message"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Transfer Money</button>
+            </form>
+        </section>
+    </div>
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <div class="container">
+            <p class="mb-1">&copy; 2024 SeamlessPay. All rights reserved.</p>
+            <p class="mb-0">
+                <a href="privacy-policy.html" class="text-white">Privacy Policy</a> | 
+                <a href="terms-of-service.html" class="text-white">Terms of Service</a> |
+                <a href="contact.html" class="text-white">Contact Us</a>
+            </p>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('paymentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const receiver = document.getElementById('receiver').value;
+            const paymentAmount = parseFloat(document.getElementById('paymentAmount').value);
+            const message = document.getElementById('message').value || 'No message';
+            const creditCard = JSON.parse(localStorage.getItem('creditCard'));
+
+            if (!creditCard) {
+                alert('Please add a credit card first.');
+                window.location.href = 'credit-card.html'
+                return;
+            }
+
+            let cardBalance = creditCard.balance || 0;
+
+            if (paymentAmount > cardBalance) {
+                alert('Insufficient balance. Please top up your card.');
+                window.location.href = 'top-up.html';
+                return;
+            }
+
+            if (confirm('Are you sure you want to make this transaction?')) {
+                // Update card balance
+                cardBalance -= paymentAmount;
+                creditCard.balance = cardBalance;
+                localStorage.setItem('creditCard', JSON.stringify(creditCard));
+                
+                // Log the transaction
+                let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+                transactions.push({
+                    type: 'Payment',
+                    receiver: receiver,
+                    amount: paymentAmount,
+                    message: message,
+                    date: new Date().toLocaleString()
+                });
+                localStorage.setItem('transactions', JSON.stringify(transactions));
+
+                alert('Transaction successful!');
+                window.location.href = 'payment-successful.html'; // Redirect to transaction successful page
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeamlessPay - Money Lock from Scams</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <nav>
+            <ul>
+                <li><a href="index.html">Homepage</a></li>
+                <li><a href="financial-insights.html">Financial Insights</a></li>
+                <li><a href="financial-services.html">Financial Services</a></li>
+                <li><a href="credit-card.html">Credit Card Management</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="logout.html">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content">
+        <header>
+            <h1>Money Lock from Scams</h1>
+            <div class="logo-container">
+                <img src="logo1.png" alt="SeamlessPay Logo">
+                <span>SeamlessPay</span>
+            </div>
+        </header>
+        <section>
+            <p>Protect your money from scams. Locking your money here means that if you get scammed, they will not be able to touch this money as it is locked.</p>
+        </section>
+        <section>
+            <h2>Lock Money</h2>
+            <form id="lockForm">
+                <div class="mb-3">
+                    <label for="lockAmount" class="form-label">Amount to Lock</label>
+                    <input type="number" class="form-control" id="lockAmount" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Lock</button>
+            </form>
+        </section>
+        <section>
+            <h2>Locked Amount</h2>
+            <div id="lockedAmountDisplay"></div>
+            <button class="btn btn-warning" onclick="window.location.href='unlock-money.html'">Unlock Money</button>
+        </section>
+    </div>
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <div class="container">
+            <p class="mb-1">&copy; 2024 SeamlessPay. All rights reserved.</p>
+            <p class="mb-0">
+                <a href="privacy-policy.html" class="text-white">Privacy Policy</a> | 
+                <a href="terms-of-service.html" class="text-white">Terms of Service</a> |
+                <a href="contact.html" class="text-white">Contact Us</a>
+            </p>
+        </div>
+    </footer>
+    <script>
+        const lockForm = document.getElementById('lockForm');
+        const lockedAmountDisplay = document.getElementById('lockedAmountDisplay');
+
+        // Load initial data
+        let creditCard = JSON.parse(localStorage.getItem('creditCard')) || { balance: 0 };
+        let lockedAmount = JSON.parse(localStorage.getItem('lockedAmount')) || 0;
+
+        function updateLockedAmountDisplay() {
+            lockedAmountDisplay.innerHTML = `<p><strong>Locked Amount:</strong> $${lockedAmount.toFixed(2)}</p>`;
+        }
+
+        updateLockedAmountDisplay();
+
+        lockForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const lockAmount = parseFloat(document.getElementById('lockAmount').value);
+
+            if (lockAmount > creditCard.balance) {
+                alert('Insufficient balance. Please top up your card.');
+                window.location.href = 'top-up.html';
+                return;
+            }
+
+            if (confirm('Are you sure you want to lock this money?')) {
+                // Update locked amount
+                lockedAmount += lockAmount;
+                localStorage.setItem('lockedAmount', JSON.stringify(lockedAmount));
+
+                // Update card balance
+                creditCard.balance -= lockAmount;
+                localStorage.setItem('creditCard', JSON.stringify(creditCard));
+
+                alert('Money locked successfully!');
+                updateLockedAmountDisplay();
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

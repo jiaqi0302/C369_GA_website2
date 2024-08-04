@@ -1,0 +1,147 @@
+/* General Body Styles for Login and Register Pages */
+body {
+    font-family: Arial, sans-serif;
+    color: #ffffff; /* White text color for the entire page */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background: linear-gradient(180deg, #000000, #FF69B4); /* Black to Pink gradient */
+    overflow: hidden; /* Prevents scrollbars */
+}
+
+/* Logo Container Styles */
+.logo-container {
+    position: absolute;
+    top: 20px;
+    right: 20px; /* Move logo to the right of the screen */
+    display: flex;
+    align-items: center;
+    color: #ffffff; /* White text color */
+}
+
+.logo-container img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.logo-container span {
+    font-size: 1.5em;
+    background: linear-gradient(45deg, #4B0082, #FF69B4); /* Purple to pink gradient */
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* Login and Register Container Styles */
+.login-container, .register-container {
+    max-width: 500px;
+    width: 100%;
+    background: #000000; /* Black background */
+    color: #ffffff; /* White text color */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+/* Header Styles for Login/Register */
+.login-container header h1, .register-container header h1 {
+    margin-bottom: 20px;
+    color: #FF69B4; /* Pink color for header */
+}
+
+/* Form Input Styles for Login/Register */
+.login-container input, .register-container input {
+    width: calc(100% - 20px); /* Full width minus padding */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensure padding is included in width */
+    background: #333333; /* Darker background for inputs */
+    color: #ffffff; /* White text color for inputs */
+}
+
+/* Button Styles for Login/Register */
+.login-container button, .register-container button {
+    width: 100%;
+    background-color: #4B0082; /* Purple button color */
+    color: #ffffff; /* White text color */
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.login-container button:hover, .register-container button:hover {
+    background-color: #000000; /* Black button color on hover */
+}
+
+/* Link Styles for Login/Register */
+.login-container a, .register-container a {
+    color: #FF69B4; /* Pink link color */
+    text-decoration: none;
+}
+
+.login-container a:hover, .register-container a:hover {
+    color: #4B0082; /* Purple link color on hover */
+}
+
+ /* Modal styles */
+ .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.4); 
+}
+
+.modal-content {
+    background:  #000000;
+    color: #fff;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+    max-width: 400px; 
+    text-align: center;
+    border-radius: 10px;
+}
+#loginButton {
+    background:  #000000;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#loginButton:hover {
+    background:  #4B0082;
+}
+
+.logo-container {
+    text-align: center;
+    margin: 20px;
+}
+.logo-container img {
+    height: 50px;
+}
+.logo-container span {
+    font-size: 24px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+.register-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
